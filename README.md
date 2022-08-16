@@ -803,7 +803,7 @@ const Register = () => {
   }, [user, navigate]);
 };
 ```
-
+//last update here
 #### 31) Setup Dashboard Pages
 
 - remove Dashboard.js
