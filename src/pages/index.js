@@ -1,6 +1,7 @@
-import Dashboard from "./Dashboard";
+// import Dashboard from "./Dashboard";
 import Error from "./Error";
 import Landing from "./Landing";
 import Register from "./Register";
+import ProtectedRoute from "./ProtectedRoute";
 
-export { Landing, Dashboard, Error, Register };
+export { Landing,  Error, Register, ProtectedRoute };

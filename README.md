@@ -803,7 +803,6 @@ const Register = () => {
   }, [user, navigate]);
 };
 ```
-//last update here
 #### 31) Setup Dashboard Pages
 
 - remove Dashboard.js
@@ -1301,7 +1300,7 @@ const BigSidebar = () => {
 
 export default BigSidebar;
 ```
-
+// last updated here
 #### 46) Profile Page - Structure
 
 Profile.js
