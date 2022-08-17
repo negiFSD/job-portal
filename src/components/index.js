@@ -3,4 +3,8 @@
 import Logo from "./Logo";
 import FormRow from "./FormRow";
 import ToggleMember from "./ToggleMember";
-export { Logo, FormRow, ToggleMember };
+import BigSidebar from "./BigSidebar";
+import Navbar from "./Navbar";
+import SmallSidebar from "./SmallSidebar";
+import NavLinks from "./NavLinks";
+export { Logo, FormRow, ToggleMember, BigSidebar, Navbar, SmallSidebar , NavLinks};
