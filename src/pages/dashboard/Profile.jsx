@@ -22,14 +22,16 @@ function Profile() {
     setUserData({...userData, [name]:value})
   }
 
-  const handleSubmit = (e)=>{
-    e.preventDefualt();
-    if(!userData.email || !userData.lastName || !userData.location || !userData.name){
-      toast.error('please all fill all values')
-      return
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const { name, email, lastName, location } = userData;
+  
+    if (!name || !email || !lastName || !location) {
+      toast.error('Please Fill Out All Fields');
+      return;
     }
     dispatch(updateUser(userData));
-  }
+  };
   return (
     <Wrapper>
     <form className='form' onSubmit={handleSubmit}>
