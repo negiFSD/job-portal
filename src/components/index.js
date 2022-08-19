@@ -7,4 +7,5 @@ import BigSidebar from "./BigSidebar";
 import Navbar from "./Navbar";
 import SmallSidebar from "./SmallSidebar";
 import NavLinks from "./NavLinks";
-export { Logo, FormRow, ToggleMember, BigSidebar, Navbar, SmallSidebar , NavLinks};
+import FormRowSelect from "./FormRowSelect";
+export { Logo, FormRow, ToggleMember, BigSidebar, Navbar, SmallSidebar , NavLinks, FormRowSelect};
