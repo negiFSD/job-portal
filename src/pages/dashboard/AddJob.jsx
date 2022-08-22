@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Wrapper from "../../assets/wrappers/DashboardFormPage";
 import { useSelector, useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import { FormRow, FormRowSelect } from "../../components";
-import { handleChange, clearValues } from "../../features/job/jobSlice";
+import { handleChange, clearValues, createJob } from "../../features/job/jobSlice";
 
 function AddJob() {
+
+  // below we are getting state from job slice
   const {
     isLoading,
     position,
@@ -16,24 +18,38 @@ function AddJob() {
     status,
     statusOptions,
     isEditing,
-    editJobId,
+    // editJobId,
   } = useSelector((store) => store.job);
+
+
+  // Below we are getting state from user slice
+  const {user}  = useSelector((store)=>store.user)
+
   const dispatch = useDispatch();
+
+  // Below we are updatig user input values, instead of local useState here we are saving and updating data in job slice
   const handleJobInput = (e) => {
     const name = e.target.name;
     const value = e.target.value;
-    // console.log(name, value);
     dispatch(handleChange({ name, value }));
   };
 
+  //here we are sending entered data to server
   const handleSubmit = (e) => {
     e.preventDefault();
-
     if (!position || !company || !jobLocation) {
       toast.error("Please Fill Out All Fields");
       return;
     }
+    dispatch(createJob({position, company, jobType, status}))
   };
+
+  // below use effect is publishing the user location on page render from userslice
+useEffect(()=>{
+if(!isEditing){
+  dispatch(handleChange({name: 'jobLocation', value:user.location}))
+}
+},[dispatch, isEditing, user.location])
 
   return (
     <Wrapper>

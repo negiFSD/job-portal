@@ -8,4 +8,6 @@ import Navbar from "./Navbar";
 import SmallSidebar from "./SmallSidebar";
 import NavLinks from "./NavLinks";
 import FormRowSelect from "./FormRowSelect";
-export { Logo, FormRow, ToggleMember, BigSidebar, Navbar, SmallSidebar , NavLinks, FormRowSelect};
+import JobsContainer from "./JobsContainer";
+import SearchContainer from "./SearchContainer";
+export { Logo, FormRow, ToggleMember, BigSidebar, Navbar, SmallSidebar , NavLinks, FormRowSelect, JobsContainer, SearchContainer};

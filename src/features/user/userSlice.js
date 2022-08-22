@@ -3,6 +3,8 @@ import { toast } from 'react-toastify';
 import customFetch from "../../utils/axios";
 import { addUserToLocalStorage, getUserFromLocalStorage, removeUserFromLocalStorage } from "../../utils/localStorage";
 
+
+// initial state of slice
 const initialState ={
     isLoading:false,
     isSidebarOpen: false,
@@ -10,7 +12,7 @@ const initialState ={
 };
 
 
-
+// sending new user registration data to server
 export const registerUser  = createAsyncThunk(
     'user/registerUser', async(user, thunkAPI)=>{
        try{
@@ -23,7 +25,7 @@ export const registerUser  = createAsyncThunk(
     }
 );
 
-
+//  for user login
 export const loginUser = createAsyncThunk(
     'user/loginUser', async(user, thunkAPI)=>{
        try{
@@ -37,6 +39,7 @@ export const loginUser = createAsyncThunk(
     }
 )
 
+// for updating user details
 export const updateUser = createAsyncThunk(
     'user/updateUser',
     async (user, thunkAPI) => {
