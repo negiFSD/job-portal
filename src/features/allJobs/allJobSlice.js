@@ -45,6 +45,15 @@ import customFetch from "../../utils/axios";
       const allJobsSlice = createSlice({
         name: 'allJobs',
         initialState,
+        reducers:{
+          showLoading:(state)=>{
+            state.isLoading = true ;
+          },
+          hideLoading:(state)=>{
+            state.isLoading=false
+          }
+        },
+
         extraReducers: {
             [getAllJobs.pending]: (state) => {
               state.isLoading = true;
@@ -61,7 +70,7 @@ import customFetch from "../../utils/axios";
 
 
       });
-
+    export const {showLoading,hideLoading} = allJobsSlice.actions
     export default allJobsSlice.reducer;
 
 

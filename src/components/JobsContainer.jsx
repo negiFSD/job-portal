@@ -11,7 +11,7 @@ function JobsContainer() {
     const dispath = useDispatch()
     useEffect(()=>{
         dispath(getAllJobs())
-    },[])
+    },[dispath])
     
     if(isLoading){
         return (

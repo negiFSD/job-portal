@@ -3,7 +3,7 @@ import Wrapper from "../../assets/wrappers/DashboardFormPage";
 import { useSelector, useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import { FormRow, FormRowSelect } from "../../components";
-import { handleChange, clearValues, createJob } from "../../features/job/jobSlice";
+import { handleChange, clearValues, createJob, editJob } from "../../features/job/jobSlice";
 
 function AddJob() {
 
@@ -14,11 +14,11 @@ function AddJob() {
     company,
     jobLocation,
     jobType,
-    jobTypeOptions,
+    jobTypeOptions, 
     status,
     statusOptions,
     isEditing,
-    // editJobId,
+    editJobId,
   } = useSelector((store) => store.job);
 
 
@@ -41,11 +41,26 @@ function AddJob() {
       toast.error("Please Fill Out All Fields");
       return;
     }
+    if (isEditing) {
+      dispatch(
+        editJob({
+          jobId: editJobId,
+          job: {
+            position,
+            company,
+            jobLocation,
+            jobType,
+            status,
+          },
+        })
+      );
+      return;
+    }
     dispatch(createJob({position, company, jobType, status}))
   };
 
   // below use effect is publishing the user location on page render from userslice
-useEffect(()=>{
+useEffect(()=>{ 
 if(!isEditing){
   dispatch(handleChange({name: 'jobLocation', value:user.location}))
 }
@@ -84,7 +99,7 @@ if(!isEditing){
             name="status"
             value={status}
             handleChange={handleJobInput}
-            list={jobTypeOptions}
+            list={statusOptions}
           />
           {/* job type */}
 
@@ -93,7 +108,7 @@ if(!isEditing){
             labelText="job type"
             value={jobType}
             handleChange={handleJobInput}
-            list={statusOptions}
+            list={jobTypeOptions}
           />
 
           {/* btn container */}

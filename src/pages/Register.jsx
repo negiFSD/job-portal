@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { Logo, FormRow, ToggleMember } from "../components";
 import Wrapper from "../assets/wrappers/RegisterPage";
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
 import { useSelector, useDispatch } from "react-redux";
 import { loginUser, registerUser } from "../features/user/userSlice";
 import { useNavigate } from "react-router-dom";
@@ -16,20 +16,17 @@ const initialState = {
 function Register() {
   const navigate = useNavigate();
   const [values, setValues] = useState(initialState);
-  const dispatch = useDispatch()
-  const {isLoading, user} = useSelector((store)=>store.user)
+  const dispatch = useDispatch();
+  const { isLoading, user } = useSelector((store) => store.user);
 
-  useEffect(()=>{
-    if(user){
+  useEffect(() => {
+    if (user) {
       setTimeout(() => {
-        navigate('/');
+        navigate("/");
       }, 3000);
       // toast.success(`welcome `)
     }
-    
-  },[user, navigate])
-
-
+  }, [user, navigate]);
 
   const handleChange = (e) => {
     const name = e.target.name;
@@ -41,15 +38,14 @@ function Register() {
     e.preventDefault();
     const { name, email, password, isMember } = values;
     if (!email || !password || (!isMember && !name)) {
-     toast.error("fill all required values");
+      toast.error("fill all required values");
       return;
     }
-    if(isMember){
-      dispatch(loginUser({email: email, password:  password}))
-      return
-    }
-    else{
-      dispatch(registerUser({email:email, password:password, name:name}))
+    if (isMember) {
+      dispatch(loginUser({ email: email, password: password }));
+      return;
+    } else {
+      dispatch(registerUser({ email: email, password: password, name: name }));
     }
   };
 
@@ -95,7 +91,19 @@ function Register() {
         />
 
         <button type="submit" className="btn btn-block" disabled={isLoading}>
-         {isLoading?`loading...`:`submit`} 
+          {isLoading ? `loading...` : `submit`}
+        </button>
+        <button
+          type="button"
+          className="btn btn-block btn-hipster"
+          disabled={isLoading}
+          onClick={() => {
+            dispatch(
+              loginUser({ email: "testUser@test.com", password: "secret" })
+            );
+          }}
+        >
+          {isLoading ? "loading..." : "demo"}
         </button>
       </form>
     </Wrapper>
