@@ -42,6 +42,26 @@ import customFetch from "../../utils/axios";
         }
       );
 
+      export const showStats =  createAsyncThunk(
+        'allJobs/showStats',
+        // we are using underscore and thunkapi as parameter below because we dont need stats here and we can access thunkapi only as a second parameter
+        async(_, thunkAPI)=>{
+          try{
+            const resp = await customFetch.get('/jobs/stats',
+            {
+              headers: {
+                authorization: `Bearer ${thunkAPI.getState().user.user.token}`,
+              },
+            });
+            // console.log(resp)
+            return resp.data
+          }
+          catch(error){
+            return thunkAPI.rejectWithValue(error.response.data.msg);
+          }
+        }
+      )
+
       const allJobsSlice = createSlice({
         name: 'allJobs',
         initialState,
@@ -51,9 +71,15 @@ import customFetch from "../../utils/axios";
           },
           hideLoading:(state)=>{
             state.isLoading=false
-          }
+          },
+          handleChange: (state, { payload: { name, value } }) => {
+            // state.page = 1;
+            state[name] = value;
+          },
+          clearFilters: (state) => {
+            return { ...state, ...initialFiltersState };
+          },
         },
-
         extraReducers: {
             [getAllJobs.pending]: (state) => {
               state.isLoading = true;
@@ -61,8 +87,23 @@ import customFetch from "../../utils/axios";
             [getAllJobs.fulfilled]: (state, { payload }) => {
               state.isLoading = false;
               state.jobs = payload.jobs;
+              state.numOfPages = payload.numOfPages;
+              state.totalJobs = payload.totalJobs;
             },
             [getAllJobs.rejected]: (state, { payload }) => {
+              state.isLoading = false;
+              toast.error(payload);
+            },
+            [showStats.pending]: (state) => {
+              state.isLoading = true;
+            },
+            [showStats.fulfilled]: (state, { payload }) => {
+              state.isLoading = false;
+              state.stats = payload.defaultStats;
+              state.monthlyApplications = payload.monthlyApplications;
+              // console.log(payload, 'stats payload')
+            },
+            [showStats.rejected]: (state, { payload }) => {
               state.isLoading = false;
               toast.error(payload);
             },
@@ -70,7 +111,7 @@ import customFetch from "../../utils/axios";
 
 
       });
-    export const {showLoading,hideLoading} = allJobsSlice.actions
+    export const {showLoading,hideLoading, handleChange, clearFilters} = allJobsSlice.actions
     export default allJobsSlice.reducer;
 
 

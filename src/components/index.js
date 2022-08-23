@@ -10,4 +10,20 @@ import NavLinks from "./NavLinks";
 import FormRowSelect from "./FormRowSelect";
 import JobsContainer from "./JobsContainer";
 import SearchContainer from "./SearchContainer";
-export { Logo, FormRow, ToggleMember, BigSidebar, Navbar, SmallSidebar , NavLinks, FormRowSelect, JobsContainer, SearchContainer};
+import StatsContainer from "./StatsContainer";
+import ChartsContainer from "./ChartsContainer";
+
+export {
+  Logo,
+  FormRow,
+  ToggleMember,
+  BigSidebar,
+  Navbar,
+  SmallSidebar,
+  NavLinks,
+  FormRowSelect,
+  JobsContainer,
+  SearchContainer,
+  StatsContainer,
+  ChartsContainer
+};
