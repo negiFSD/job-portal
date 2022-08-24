@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/job-portal/static/css/main.9d4ab88f.css",
+    "main.js": "/job-portal/static/js/main.11853ad9.js",
+    "static/media/main2.svg": "/job-portal/static/media/main2.8f3f28cd924ca60ffc5ae771b4b0eec7.svg",
+    "static/media/not-found.svg": "/job-portal/static/media/not-found.5cfa24fa5e3ca7dffe02f358358ea9df.svg",
+    "static/media/logo.svg": "/job-portal/static/media/logo.35bb8e1d9b5745af32ff148cbee51dfa.svg",
+    "index.html": "/job-portal/index.html",
+    "main.9d4ab88f.css.map": "/job-portal/static/css/main.9d4ab88f.css.map",
+    "main.11853ad9.js.map": "/job-portal/static/js/main.11853ad9.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.9d4ab88f.css",
+    "static/js/main.11853ad9.js"
+  ]
+}
