@@ -10,10 +10,11 @@ function SearchContainer() {
   useSelector((store) => store.allJobs);
 const { jobTypeOptions, statusOptions } = useSelector((store) => store.job);
 const dispatch = useDispatch();
+
 const handleSearch = (e) => {
-const name = e.target.name
-const value = e.target.value    
-dispatch(handleChange({name,value}))
+  // below is not exactly debouncing but with this we will not be able to type any other word before data is fetched from previous entered keywords
+  if (isLoading) return;
+  dispatch(handleChange({ name: e.target.name, value: e.target.value }));
 };
 const handleSubmit = (e) => {
   e.preventDefault();

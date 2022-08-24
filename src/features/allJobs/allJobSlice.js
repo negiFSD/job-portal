@@ -2,8 +2,6 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
 import customFetch from "../../utils/axios";
 
-
-
     const initialFiltersState = {
         search: '',
         searchStatus: 'all',
@@ -22,12 +20,15 @@ import customFetch from "../../utils/axios";
         monthlyApplications: [],
         ...initialFiltersState,
       }; 
-      
+      // Below we are getting all jobs
       export const getAllJobs = createAsyncThunk(
         'allJobs/getJobs',
         async (_, thunkAPI) => {
-          let url = `/jobs`;
-      
+          const { page, search, searchStatus, searchType, sort } =thunkAPI.getState().allJobs;
+          let url = `/jobs?status=${searchStatus}&jobType=${searchType}&sort=${sort}&page=${page}`;
+          if (search) {
+            url = url + `&search=${search}`;
+          }
           try {
             const resp = await customFetch.get(url, {
               headers: {
@@ -41,7 +42,7 @@ import customFetch from "../../utils/axios";
           }
         }
       );
-
+      
       export const showStats =  createAsyncThunk(
         'allJobs/showStats',
         // we are using underscore and thunkapi as parameter below because we dont need stats here and we can access thunkapi only as a second parameter
@@ -62,6 +63,7 @@ import customFetch from "../../utils/axios";
         }
       )
 
+
       const allJobsSlice = createSlice({
         name: 'allJobs',
         initialState,
@@ -73,11 +75,14 @@ import customFetch from "../../utils/axios";
             state.isLoading=false
           },
           handleChange: (state, { payload: { name, value } }) => {
-            // state.page = 1;
+            state.page = 1;
             state[name] = value;
           },
           clearFilters: (state) => {
             return { ...state, ...initialFiltersState };
+          },
+          changePage: (state, { payload }) => {
+            state.page = payload;
           },
         },
         extraReducers: {
@@ -107,11 +112,12 @@ import customFetch from "../../utils/axios";
               state.isLoading = false;
               toast.error(payload);
             },
+           
         }
 
 
       });
-    export const {showLoading,hideLoading, handleChange, clearFilters} = allJobsSlice.actions
+    export const {showLoading,hideLoading, handleChange, clearFilters, changePage,} = allJobsSlice.actions
     export default allJobsSlice.reducer;
 
 
